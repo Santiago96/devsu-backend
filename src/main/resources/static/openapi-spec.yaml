@@ -1,0 +1,298 @@
+openapi: 3.0.0
+info:
+  title: Devsu Bank Spec File
+  version: 1.0.0
+paths:
+  /cliente:
+    get:
+      summary: Get a list of clients
+      responses:
+        '200':
+          description: A list of clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+    post:
+      summary: Create a new client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '201':
+          description: The created client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+  /cliente/{id}:
+    get:
+      summary: Get a specific client by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+    put:
+      summary: Update a client by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          description: The updated client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+    delete:
+      summary: Delete a client by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Client successfully deleted
+
+  /cuenta:
+    get:
+      summary: Get a list of accounts
+      responses:
+        '200':
+          description: A list of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+    post:
+      summary: Create a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '201':
+          description: The created account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /cuenta/{id}:
+    get:
+      summary: Get a specific account by account number
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    put:
+      summary: Update an account by account number
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          description: The updated account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    delete:
+      summary: Delete an account by account number
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Account successfully deleted
+
+  /movimiento:
+    get:
+      summary: Get a list of transactions
+      responses:
+        '200':
+          description: A list of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+    post:
+      summary: Create a new transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        '201':
+          description: The created transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+  /movimiento/{id}:
+    get:
+      summary: Get a specific transaction by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    put:
+      summary: Update a transaction by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        '200':
+          description: The updated transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        gender:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+        dateOfBirth:
+          type: string
+        age:
+          type: string
+        state:
+          type: string
+        password:
+          type: string
+        passwordRepeated:
+          type: string
+      required:
+        - name
+        - email
+        - password
+        - passwordRepeated
+
+    Account:
+      type: object
+      properties:
+        number_account:
+          type: integer
+        balance:
+          type: number
+        state:
+          type: boolean
+        type:
+          type: string
+        client:
+          type: object
+          $ref: "#/components/schemas/Client"
+      required:
+        - type
+        - balance
+        - client
+    Transaction:
+      type: object
+      properties:
+        transaction_id:
+          type: integer
+        date:
+          type: string
+        type:
+          type: string
+        state:
+          type: boolean
+        balance:
+          type: number
+        balance_transaction:
+          type: number
+        movement:
+          type: string
+        client:
+          type: object
+          $ref: "#/components/schemas/Client"
+        account:
+          type: object
+          $ref: "#/components/schemas/Account"
+      required:
+        - date
+        - type
+        - balance

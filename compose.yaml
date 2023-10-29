@@ -1,1 +1,12 @@
+version: '3.8'
+
 services:
+  postgres:
+    image: postgres:latest
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: devsu_test_password
+      POSTGRES_DB: devsu_bank
+    ports:
+      - "5432:5432"
