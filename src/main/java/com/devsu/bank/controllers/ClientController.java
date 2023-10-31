@@ -5,11 +5,13 @@ import com.devsu.bank.generated.api.models.Client;
 import com.devsu.bank.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController implements ClienteApi {
 
     @Autowired

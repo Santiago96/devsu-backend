@@ -254,7 +254,7 @@ components:
     Account:
       type: object
       properties:
-        number_account:
+        numberAccount:
           type: integer
         balance:
           type: number
@@ -282,7 +282,7 @@ components:
           type: boolean
         balance:
           type: number
-        balance_transaction:
+        balanceTransaction:
           type: number
         movement:
           type: string

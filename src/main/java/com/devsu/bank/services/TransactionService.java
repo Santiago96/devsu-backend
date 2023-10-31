@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class TransactionService {
@@ -30,5 +33,10 @@ public class TransactionService {
         transactionEntity.setType(account.getType());
 
         return TransactionConverter.convertToExpose(transactionRepository.save(transactionEntity));
+    }
+
+    public List<Transaction> getAllTransactions() {
+        List<com.devsu.bank.model.Transaction> transactionList = transactionRepository.findAll();
+        return transactionList.stream().map(transaction -> TransactionConverter.convertToExpose(transaction)).collect(Collectors.toList());
     }
 }

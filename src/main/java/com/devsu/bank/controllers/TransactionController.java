@@ -5,11 +5,13 @@ import com.devsu.bank.generated.api.models.Transaction;
 import com.devsu.bank.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController implements MovimientoApi {
 
     @Autowired
@@ -17,7 +19,7 @@ public class TransactionController implements MovimientoApi {
 
     @Override
     public ResponseEntity<List<Transaction>> movimientoGet() {
-        return MovimientoApi.super.movimientoGet();
+        return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 
     @Override

@@ -40,7 +40,7 @@ public class Transaction {
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "account_number")
+    @JoinColumn(name = "number_account")
     private Account account;
 
 }

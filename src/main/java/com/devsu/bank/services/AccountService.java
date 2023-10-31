@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class AccountService {
@@ -25,5 +28,11 @@ public class AccountService {
         com.devsu.bank.model.Account accountEntity = AccountConverter.convertToEntity(account);
         accountEntity.setClient(client);
         return AccountConverter.convertToExpose(accountRepository.save(accountEntity));
+    }
+
+    public List<Account> getAllAccounts() {
+        List<com.devsu.bank.model.Account> accountList = accountRepository.findAll();
+
+        return accountList.stream().map(account -> AccountConverter.convertToExpose(account)).collect(Collectors.toList());
     }
 }
